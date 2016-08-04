@@ -1,0 +1,29 @@
+_repo: Life-of-John-Coleridge-Patteson---Missionary-Bishop-of-the-Melanesian-Islands_4952
+_version: 0.0.1
+creator:
+  author:
+    agent_name: Yonge, Charlotte M. (Charlotte Mary)
+    aliases:
+    - Yonge, Charlotte Mary
+    - Yonge, C. M. (Charlotte Mary)
+    birthdate: 1823
+    deathdate: 1901
+    gutenberg_agent_id: '945'
+    url: http://www.gutenberg.org/2009/agents/945
+    wikipedia: http://en.wikipedia.org/wiki/Charlotte_Mary_Yonge
+description: Vols. 1 and 2.
+gutenberg_issued: '2004-01-01'
+gutenberg_type: Text
+identifiers:
+  gutenberg: '4952'
+language: en
+publisher: Project Gutenberg
+rights: Public domain in the USA.
+rights_url: http://creativecommons.org/about/pdm
+subjects:
+- !lcc 'BV'
+- !lcsh 'Missions -- Melanesia'
+- !lcsh 'Patteson, John Coleridge, 1827-1871'
+- GITenberg
+title: 'Life of John Coleridge Patteson : Missionary Bishop of the Melanesian Islands'
+url: http://www.gutenberg.org/ebooks/4952
