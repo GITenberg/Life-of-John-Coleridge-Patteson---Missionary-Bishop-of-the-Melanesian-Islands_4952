@@ -1,0 +1,61 @@
+sudo: required
+dist: trusty
+language: ruby
+
+before_install:
+before_install:
+- gem install asciidoctor -v 1.5.2
+- gem install tilt
+- sudo pip install git+https://github.com/gitenberg-dev/gitberg
+- sudo pip install pillow
+- sudo pip install cssutils
+- sudo pip install docutils
+- sudo pip install roman
+- sudo pip install git+https://github.com/gitenberg-dev/pg-epubmaker
+script:
+- VERSION=`ruby -e "require 'yaml'; meta = YAML.load_file('metadata.yaml'); puts meta['_version'];"`
+- git clone https://github.com/gitenberg-dev/asciidoctor-htmlbook.git
+- sudo pip install -r asciidoctor-htmlbook/gitberg-machine/requirements.txt
+
+- /usr/bin/python -c "from gitenberg import travis; travis.build_epub()"
+- ebook-convert book.epub book.mobi
+- xvfb-run ebook-convert book.epub book.pdf
+branches:
+  only:
+  - master
+notifications:
+  webhooks:
+    urls:
+      - https://unglue.it/api/travisci/webhook
+    on_success: always
+    on_failure: never
+    on_start: never
+deploy:
+  skip_cleanup: true
+  provider: releases
+  api_key:
+    secure: QS9j/OjlTqmZ2klmA+dVQoYgGQuTAfk3bd0G0pBsUNSf7+krwoQLAGs5Dg3aRo+Lap4GdiJnI3s3oj5v0VhGXJMioYeAmOlXgMOwOGc/BIDbI611SgB9G795w9dOi/rswib2AW4/YHO3x/VQGBB5uyO1fhQrLDcr5h5z61c+7woKNx5gxU2qh33LPq+5kcjRvdve58zp3lUIzHzASvkIPJVOAzRtmHnp0Cdr1YIg2kJ59ZRpJCO7Tpic2mqY5blwitrUVqn9fBaGp+oJcnJ195/JLu6776Vz71y2QD3/qBkWnFhnVOYJbGlZQ9Q+Y7srfAEegBmA90qYMDfVZZ7dbZLGSNWPEjZTuvyf0g8KPmabr/BAh2+5883+ZYkfE5z7Ut50Syqe4/VZ60efA0BKKJTd1giSheUWEnbxvOeplhM/wuhgSAJHvXOSgnb7lIzRJN8bIjaKY+XDHVPDi1gII5xtc+18Sh9sQWmcYGoZ6R3jGdrcGY/WFbdBrxzDEqGx6v57NaLCcqjKd49/PVFOJYyZyMeFaSGABSm9EU//jJfgiSxO/qvfFv0/sggIvfU7v4CJz6ITCWZvzBqYoR925omtGQQAXBoRv/mQMvjuhlHmf31+4o10g1ZlxIVy0n1FyhNRrJk/tOU1k9mLrSmRdpn/3qY1JmAAMfm/7RXvLWc=
+  file:
+    - book.epub
+    - book.mobi
+    - book.pdf
+  "on":
+    repo: GITenberg/Life-of-John-Coleridge-Patteson---Missionary-Bishop-of-the-Melanesian-Islands_4952
+addons:
+  apt:
+    packages:
+    - xsltproc
+    - xvfb
+    - calibre
+    - python-pip
+    - git
+    - python-dev
+    - libjpeg-dev
+    - libpng-dev
+    - libfreetype6
+    - libfreetype6-dev
+    - zlib1g-dev
+    - python-lxml
+    - libxml2-dev
+    - libxslt1-dev
+    - tidy
